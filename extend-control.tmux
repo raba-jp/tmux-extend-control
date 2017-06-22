@@ -3,8 +3,10 @@
 source_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${source_path}/scripts/helpers.sh"
 
-readonly extend_control_key="$(get_tmux_option "@extend_control_key" "g")"
+tmux bind-key "$(get_tmux_option "@window_control_key" "w")" \
+	split-window -l 10 "$source_path/scripts/window.sh"
+tmux bind-key "$(get_tmux_option "@session_control_key", "s")" \
+	split-window -l 10 "$source_path/scripts/session.sh"
 
-tmux bind-key "$extend_control_key" split-window -l 10 "$source_path/scripts/extend_control.sh"
 
 unset source_path

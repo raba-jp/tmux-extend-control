@@ -25,7 +25,10 @@ control_window() {
 	local selected=$(echo "`window_choices`" | peco)
 	local selected_id=$(echo "$selected" | awk '{print $4}' | sed "s/://g")
 	case "$selected" in
-		*Switch* ) tmux select-window -t "$selected_id" ;;
+		*Switch* )
+			tmux select-window -t "$selected_id"
+			return
+			;;
 		*Kill* ) tmux kill-window -t "$selected_id" ;;
 		"Create window" ) tmux new-window ;;
 		"Exit" ) return ;;

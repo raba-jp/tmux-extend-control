@@ -1,7 +1,5 @@
 # tmux-extend-control
 
-## NOT WORKING!!
-
 This operates tmux.
 ex)
 - create new session and new window

@@ -8,7 +8,7 @@ session_choices_format() {
 }
 
 session_choices() {
-	local choices=$(tmux list-window -F "`session_choices_format`" 2>/dev/null)
+	local choices=$(tmux list-sessions -F "`session_choices_format`" 2>/dev/null)
 	echo "$choices" | while read line; do
 		echo "Select ==> $line"
 	done

@@ -10,7 +10,7 @@ session_choices_format() {
 session_choices() {
 	local choices=$(tmux list-sessions -F "`session_choices_format`" 2>/dev/null)
 	echo "$choices" | while read line; do
-		echo "Select ==> $line"
+		echo "Attach ==> $line"
 	done
 	echo "$choices" | while read line; do
 		echo "Kill ==> $line"
@@ -23,7 +23,7 @@ session_control() {
 	local selected=$(echo "`session_choices`" | peco)
 	local selected_id=$(echo "$selected" | awk '{print $4}' | sed "s/://g")
 	case "$selected" in
-		*Attach* ) tmux attach -t "$selected_id" ;;
+		*Attach* ) tmux switch-client -t "$selected_id" ;;
 		*Kill* )
 			tmux kill-session -t "$selected_id"
 			$(tmux has_session 2>/dev/null) && session_control
